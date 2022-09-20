@@ -1,0 +1,37 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title": "Pokemon Go Popularity by country",
+    "width": 850,
+    "height": 500,
+    "projection": {"type": "equalEarth"},
+    "data": {
+    "url": "https://raw.githubusercontent.com/Aswikinz/public/main/ne_110m_admin_0_countries.topojson",
+    "format": {"type": "topojson", "feature": "ne_110m_admin_0_countries"}
+    },
+    "transform": [
+    {
+    "lookup": "properties.NAME",
+    "from": {
+    "data": {
+    "url": "https://raw.githubusercontent.com/Aswikinz/public/main/edited_data.csv"
+    },
+    "key": "country",
+    "fields": ["Popularity by region"]
+    }
+    }
+    
+    ],
+    "mark": {"type": "geoshape","stroke":"black"},
+    "encoding": {
+    "color": {
+    "field": "Popularity by region",
+    "type": "quantitative",
+    "scale": {"type": "log"}
+    },
+    "tooltip": [
+    {"field": "properties.NAME", "type": "nominal", "title":
+    "country"},
+    {"field": "Popularity by region", "type": "quantitative"}
+    ]
+    }
+    }
